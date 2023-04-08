@@ -99,7 +99,7 @@ async function onSubmitForm(event) {
   function onLoadMoreClick(e) {
     page += 1;
     GetUsersBtn(valueSearchQuery);
-    SimpleLightbox = new SimpleLightbox('.gallery a').refresh();
+    gallery = new SimpleLightbox('.gallery a').refresh();
     loadMoreBtnHidden();
   }  
 
