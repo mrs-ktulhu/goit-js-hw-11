@@ -64,7 +64,7 @@ async function onSubmitForm(event) {
   
   async function GetUsersBtn(valueSearchQuery) {
     try {
-      const { hits, totalHits } = await pixabayImage(valueSearchQuery, page);
+      const { hits, totalHits } = await pixabayImages(valueSearchQuery, page);
       if (!hits.length) {
         throwError();
       } else {
@@ -95,16 +95,18 @@ async function onSubmitForm(event) {
   function successNotify(totalHits) {
     Notify.success(`Hooray! We  found ${totalHits}  images.`);
     console.log(`Hooray! We  found ${totalHits}  images.`);
-  }
+}
+  function onLoadMoreClick(e) {
+    page += 1;
+    GetUsersBtn(valueSearchQuery);
+    SimpleLightbox = new SimpleLightbox('.gallery a').refresh();
+    loadMoreBtnHidden();
+  }  
+
   function throwError() {
     throw new Error(
       'Sorry, there are no images matching your search query. Please try again.'
     );
-  }
-  function onLoadMoreClick(e) {
-    page += 1;
-    GetUsersBtn(valueSearchQuery);
-    loadMoreBtnHidden();
   }
   function loadMoreBtnHidden() {
     loadMoreBtn.classList.add('is-hidden');
@@ -161,5 +163,6 @@ async function onSubmitForm(event) {
     galleryContainer.innerHTML = '';
     loadMoreBtnHidden();
     endCollectionHidden();
-  }
+}
+ 
   
